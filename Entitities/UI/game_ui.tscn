@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5m4284wfhli6"]
+
+[ext_resource type="PackedScene" uid="uid://bfugghcjchnn8" path="res://Entitities/UI/game_over.tscn" id="1_gwk6t"]
+[ext_resource type="Script" uid="uid://dwh83m6nwgrbh" path="res://Entitities/UI/game_ui.gd" id="1_xjfbv"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xjfbv")
+
+[node name="Game Over" parent="." instance=ExtResource("1_gwk6t")]
+layout_mode = 1

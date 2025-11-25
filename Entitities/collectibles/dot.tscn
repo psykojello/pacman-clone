@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bahgw6py2n53b"]
+
+[ext_resource type="PackedScene" uid="uid://b8h0mk0spcrru" path="res://Entitities/collectibles/collectible.tscn" id="1_1c7to"]
+[ext_resource type="Texture2D" uid="uid://ka6v8ssb1j4f" path="res://Assets/tilesheets/spr_all5_4A2.png" id="1_c4igg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fxdc"]
+atlas = ExtResource("1_c4igg")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tmpdf"]
+radius = 3.1622777
+
+[node name="Dot" instance=ExtResource("1_1c7to")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = SubResource("AtlasTexture_1fxdc")
+region_enabled = true
+region_rect = Rect2(190, 106, 20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_tmpdf")

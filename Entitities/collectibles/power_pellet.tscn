@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://djbgumhn80oxp"]
+
+[ext_resource type="PackedScene" uid="uid://b8h0mk0spcrru" path="res://Entitities/collectibles/collectible.tscn" id="1_menol"]
+[ext_resource type="Texture2D" uid="uid://ka6v8ssb1j4f" path="res://Assets/tilesheets/spr_all5_4A2.png" id="2_ktie4"]
+[ext_resource type="Script" uid="uid://dl5i6k5axqpxj" path="res://Entitities/collectibles/power_pellet.gd" id="2_t0onk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fxdc"]
+atlas = ExtResource("2_ktie4")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tmpdf"]
+radius = 3.1622777
+
+[node name="PowerPellet" instance=ExtResource("1_menol")]
+script = ExtResource("2_t0onk")
+points = 50
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_1fxdc")
+region_enabled = true
+region_rect = Rect2(274, 1, 20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_tmpdf")
