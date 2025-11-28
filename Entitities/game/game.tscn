@@ -33,4 +33,4 @@ script = ExtResource("7_2d6x5")
 position = Vector2(280, 470)
 
 [node name="SpawnPtGhost1" type="Node2D" parent="."]
-position = Vector2(130, 210)
+position = Vector2(280, 230)

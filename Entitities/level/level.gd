@@ -1,4 +1,4 @@
-extends TileMapLayer
+extends Node
 
 class_name Level
 
@@ -23,25 +23,33 @@ func _ready():
 			)
 			
 			var tile_data = tilemap.get_cell_source_id(tile_position)
-			if tile_data == 1:
-				print(str(tile_position) + " : solid" )
+			if tile_data != -1:
 				astar_grid.set_point_solid(tile_position)
-			else:
-				print(str(tile_position) + " : walkable" )
 	
 
 func convert_to_grid(pos : Vector2) -> Vector2i:
 	return tilemap.local_to_map(pos)
 		
 func navigate(from : Vector2i, to: Vector2i):
-	var id_path = astar_grid.get_id_path(from, to, true)
-	print(id_path)
-	#var packedpts : PackedVector2Array
-	#for pt in id_path:
-		#var pos = tilemap.map_to_local(pt)
-		#packedpts.append(pos)
-		#draw_circle(pos, 5, Color.RED)
-	#
-	#
-	#draw_multiline(packedpts, Color.RED, 1.0)
+	if not astar_grid.is_in_boundsv(from) or not astar_grid.is_in_boundsv(to):
+		print("Navigation error: point out of bounds")
+		return []
 	
+	if astar_grid.is_point_solid(from) or astar_grid.is_point_solid(to):
+		print("Navigation error: point is solid")
+		return []
+		
+	var id_path = astar_grid.get_id_path(from, to, true)
+	return id_path
+
+func get_next_tile(from_pos: Vector2, to_pos: Vector2) -> Vector2i:
+	var from_grid = convert_to_grid(from_pos)
+	var to_grid = convert_to_grid(to_pos)
+	var path = navigate(from_grid, to_grid)
+	
+	if path.size() > 1:
+		return path[1]  # Return next step (path[0] is current position)
+	return from_grid  # No path found, stay put
+
+func is_walkable(tile: Vector2i) -> bool:
+	return tilemap.get_cell_source_id(tile) == -1	

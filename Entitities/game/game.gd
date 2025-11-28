@@ -35,11 +35,24 @@ func spawn_pacman():
 func spawn_ghosts():
 	var blinky : Ghost = ghost_scene.instantiate()
 	blinky.ghost_color = Color.RED
+	blinky.ghost_type = Ghost.GHOSTTYPE.BLINKY
 	blinky.position = spawn_pt_ghost.position
 	blinky.killed_pacman.connect(_on_pacman_killed)
 	blinky.ghost_eaten.connect(_on_ghost_eaten)
 	add_child(blinky)
 	ghosts.append(blinky)
+	
+	await get_tree().create_timer(2.0).timeout
+	
+	var pinky : Ghost = ghost_scene.instantiate()
+	pinky.ghost_color = Color.HOT_PINK
+	pinky.ghost_type = Ghost.GHOSTTYPE.PINKY
+	pinky.position = spawn_pt_ghost.position
+	pinky.killed_pacman.connect(_on_pacman_killed)
+	pinky.ghost_eaten.connect(_on_ghost_eaten)
+	add_child(pinky)
+	ghosts.append(pinky)
+	
 	
 func game_over():
 	input_allowed = false
@@ -90,7 +103,8 @@ func _on_ghost_eaten(points):
 func reset_level():
 	pacman.position = spawn_pt_pacman.position
 	for ghost in ghosts:
-		ghost.position = spawn_pt_ghost.position
+		ghost.reset_ghost(spawn_pt_ghost.position)
+		
 	pacman.wake_up()
 	
 func reset_game():
