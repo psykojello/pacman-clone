@@ -15,8 +15,8 @@ var input_allowed = true
 var pacman : Pacman
 var ghosts : Array[Ghost] = []
 
-@onready var tilemap = $TileMap/Walls
-@onready var dots_layer = $TileMap/Dots
+@onready var tilemap = $Level/Walls
+@onready var dots_layer = $Level/Dots
 @onready var spawn_pt_pacman = $SpawnPtPacman
 @onready var spawn_pt_ghost = $SpawnPtGhost1
 

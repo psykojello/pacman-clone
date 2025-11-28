@@ -4,6 +4,7 @@ class_name Ghost
 @export var ghost_color: Color = Color.RED
 @onready var sprite = $AnimatedSprite2D
 @onready var detection_area = $DetectionArea
+@onready var level: Level = get_node("../Level")
 
 enum GHOSTSTATE {NORMAL, SCARED}
 var ghost_state = GHOSTSTATE.NORMAL
@@ -33,3 +34,11 @@ func eaten():
 	#change to eyes only state
 	queue_free()
 	
+
+func _input(event):
+	
+	if event.is_action_pressed("NavClicked") == false:
+		return
+	var from = level.convert_to_grid(position)
+	var to = level.convert_to_grid(get_global_mouse_position())
+	level.navigate(from, to)
